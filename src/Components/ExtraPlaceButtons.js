@@ -4,6 +4,22 @@ import { ShareAltOutlined } from "@ant-design/icons";
 import { LogEngagementEvent } from "../Logging";
 
 export class ExtraPlaceButtons extends React.Component {
+
+  copyToClipboard(str){
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(str)
+    }
+    else{
+      const el = document.createElement('textarea');
+      el.value = str
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+    message.success('Copied');
+  }
+
   render() {
     var place = this.props.place;
     return (
@@ -20,8 +36,7 @@ export class ExtraPlaceButtons extends React.Component {
                 "share",
                 place.placeID
               );
-            navigator.clipboard.writeText(window.location.origin + "/" + place.placeID)
-            message.success('Copied');
+              this.copyToClipboard(window.location.origin + "/" + place.placeID)
             }}
           >
           </Button>
