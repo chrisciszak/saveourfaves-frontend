@@ -24,6 +24,12 @@ export class ExtraPlaceButtons extends React.Component {
     var place = this.props.place;
     return (
       <div className="place-buttons">
+        <Button 
+          type="link" 
+          size="small"
+          href={"/ask-for-help/" + this.props.place.placeID}>
+          Own this place?
+        </Button>
         <Tooltip title="copy">
           <Button
             shape="circle"

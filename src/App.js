@@ -13,6 +13,7 @@ import LogEngagementEvent from "./Logging";
 import NeighborhoodCards from "./Components/NeighborhoodCards";
 import PlaceFilterDisplay from "./Components/PlaceFilterDisplay";
 import ShareOptions from "./Components/ShareOptions";
+import AskForHelpModal from "./Components/AskForHelpModal";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -75,6 +76,7 @@ class App extends React.Component {
       >
         <div>
           <div style={{ marginTop: "0px" }}>
+            <AskForHelpModal />
             <FAQModal
               shouldShow={this.state.faqVisible}
               onClose={() => {
@@ -143,7 +145,7 @@ class App extends React.Component {
                     save it.
                   </Title>
                   <div className="header-sans">
-                    Gift cards and donations help "flatten the curve" of lost income from
+                    Gift cards, donations and takeaways help "flatten the curve" of lost income from
                     COVID-19.
                   </div>
                 </Col>
