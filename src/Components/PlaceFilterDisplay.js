@@ -56,6 +56,7 @@ export class PlaceFilterDisplay extends React.Component {
         <PlaceAutosuggestion
           onPlaceSelected={placeID => {
             this.fetchPlaceInfo(this.elementRef, placeID);
+            window.history.pushState({prevUrl: window.location.href}, null, "/place/" + placeID);
           }}
           onSearchChanged={newValue => {
             if (newValue.length === 0) {

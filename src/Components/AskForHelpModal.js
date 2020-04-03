@@ -8,13 +8,7 @@ class AskForHelpModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
-      place: {
-        name: "",
-        address: "",
-        placeID: ""
-      },
-      placeCollagePicture: ""
+      place: this.props.place
     };
 
     const params = window.location.pathname.slice(1).split("/");
@@ -51,13 +45,13 @@ class AskForHelpModal extends React.Component {
     return <a target={target} href={url} >{text}</a>;
   };
 
-  renderDownloadLink(url, text, target) {
+  renderDownloadLink(placeID, text, target) {
     target = target || "_blank";
-    return <a target={target} href={url} download="SaveYourVenue-Collage.jpg">{text}</a>;
+    return <a target={target} href={"/api/places/collage_picture?place_id=" + placeID} download="SaveYourVenue-Collage.jpg">{text}</a>;
   };
 
-  renderImage(url) {
-    return <img src={url} alt=""/>;
+  renderImage(placeID) {
+    return <img src={"/api/places/collage_picture?place_id=" + placeID} alt=""/>;
   };
 
   addPlaceLink(text) {
@@ -68,21 +62,15 @@ class AskForHelpModal extends React.Component {
     return { __html: this.props.body };
   };
 
-  handleCancel = e => {
-    this.setState({
-      visible: false,
-    });
-  };
-
   render() {
     return (
       <>
         <Modal
           title="Ask For Help"
-          visible={this.state.visible}
+          visible={this.props.visible}
           width="80%"
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
+          onCancel={this.props.onCancel}
+          footer={<span></span>}
         >
           <h2>We are here for you</h2>
           <p>We understand that this must be difficult time for you, your family and your customers. Our mission is to help you surive the Covid-19 pandemic. 
@@ -96,14 +84,14 @@ class AskForHelpModal extends React.Component {
           </ol> 
           <h2>Facebook Post Template to copy</h2>
           <ol>
-            <li>{this.renderDownloadLink(this.state.placeCollagePicture, "Download", "_self")} collage picture we created for you</li>
+            <li>{this.renderDownloadLink(this.state.place.placeID, "Download", "_self")} collage picture we created for you</li>
             <li>Copy the text from the template below and post it in your local community on {this.renderLink("https://www.facebook.com/groups/", "Facebook Groups")}</li>
             <li>In case you need it, this is a link to your restaurant on SaveYourVenue.org: {this.renderLink("https://www.saveyourvenue.org/place/" + this.state.place.placeID, "https://www.saveyourvenue.org/place/" + this.state.place.placeID)}</li>
           </ol>
           <div className="fb-template">
             <div className="header">
               <div>
-                <img class="profile-picture" src={this.state.place.imageURL} alt="" />
+                <img className="profile-picture" src={this.state.place.imageURL} alt="" />
               </div>
               <div>
                 <div><a className="name">{this.state.place.name}</a></div>
@@ -119,16 +107,16 @@ class AskForHelpModal extends React.Component {
               Without your support, our restaurant will die!<br/>
               It's so hard at the moment. Thank you very much for reading! Wish you all to stay safe and together we will overcome this difficult times!<br/>
             </p>
-            {this.renderImage(this.state.placeCollagePicture)}<br/>
-            <div class="buttons">
-              <div class="_2pi4 _36iq _4lk2 _3xre _2165" title="Like">
-                <i class="_3-8_ _2yf7 _5jp _2166 img sp_post-plugin sx_post-plugin_like-light"></i>87K
+            {this.renderImage(this.state.place.placeID)}<br/>
+            <div className="buttons">
+              <div className="_2pi4 _36iq _4lk2 _3xre _2165" title="Like">
+                <i className="_3-8_ _2yf7 _5jp _2166 img sp_post-plugin sx_post-plugin_like-light"></i>87K
               </div>
-              <div class="_2pi4 _36iq _4lk2 _3xre _1p4p" title="Comment">
-                <i class="_3-8_ _2yf7 _5jp _4mlr img sp_post-plugin sx_post-plugin_comment-light"></i>8.2K
+              <div className="_2pi4 _36iq _4lk2 _3xre _1p4p" title="Comment">
+                <i className="_3-8_ _2yf7 _5jp _4mlr img sp_post-plugin sx_post-plugin_comment-light"></i>8.2K
               </div>
-              <div class="_2pi4 _36iq _4lk2 _3xre _50sk" title="Share">
-                <i class="_3-8_ _2yf7 _5jp _2167 img sp_post-plugin sx_post-plugin_share-light"></i>15K
+              <div className="_2pi4 _36iq _4lk2 _3xre _50sk" title="Share">
+                <i className="_3-8_ _2yf7 _5jp _2167 img sp_post-plugin sx_post-plugin_share-light"></i>15K
               </div>
             </div>
           </div>
