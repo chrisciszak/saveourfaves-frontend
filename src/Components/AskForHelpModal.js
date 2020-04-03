@@ -19,7 +19,6 @@ class AskForHelpModal extends React.Component {
       )
       if(currentPlace){
         this.state.visible = true;
-        this.state.placeCollagePicture= "/api/places/collage_picture?place_id=" + placeKey;
         this.fetchPlaceInfo(this.elementRef, placeKey);
       }
     }
@@ -84,30 +83,30 @@ class AskForHelpModal extends React.Component {
           </ol> 
           <h2>Facebook Post Template to copy</h2>
           <ol>
-            <li>{this.renderDownloadLink(this.state.place.placeID, "Download", "_self")} collage picture we created for you</li>
+            <li>{this.renderDownloadLink(this.props.place.placeID, "Download", "_self")} collage picture we created for you</li>
             <li>Copy the text from the template below and post it in your local community on {this.renderLink("https://www.facebook.com/groups/", "Facebook Groups")}</li>
-            <li>In case you need it, this is a link to your restaurant on SaveYourVenue.org: {this.renderLink("https://www.saveyourvenue.org/place/" + this.state.place.placeID, "https://www.saveyourvenue.org/place/" + this.state.place.placeID)}</li>
+            <li>In case you need it, this is a link to your restaurant on SaveYourVenue.org: {this.renderLink("https://www.saveyourvenue.org/place/" + this.props.place.placeID, "https://www.saveyourvenue.org/place/" + this.props.place.placeID)}</li>
           </ol>
           <div className="fb-template">
             <div className="header">
               <div>
-                <img className="profile-picture" src={this.state.place.imageURL} alt="" />
+                <img className="profile-picture" src={this.props.place.imageURL} alt="" />
               </div>
               <div>
-                <div><a className="name">{this.state.place.name}</a></div>
+                <div><a className="name">{this.props.place.name}</a></div>
                 <div><span className="date">3 hr</span></div>
               </div>
             </div>
             <p>We are dying! <br/>
               Its hard to write these things in a local facebook group. But it's time to ask for help from local people.<br/>
-              We are {this.state.place.name}, {this.state.place.address}<br/>
+              We are {this.props.place.name}, {this.props.place.address}<br/>
               The business had been running quite well until the coronavirus started.<br/>
               🙁 People fear to come to the restaurant. But we know you still need to eat.<br/>
-              ✅ You can order takeaway or donate at {this.renderLink("https://www.saveyourvenue.org/place/" + this.state.place.placeID, "https://www.saveyourvenue.org/place/" + this.state.place.placeID)}<br/><br/>
+              ✅ You can order takeaway or donate at {this.renderLink("https://www.saveyourvenue.org/place/" + this.props.place.placeID, "https://www.saveyourvenue.org/place/" + this.props.place.placeID)}<br/><br/>
               Without your support, our restaurant will die!<br/>
               It's so hard at the moment. Thank you very much for reading! Wish you all to stay safe and together we will overcome this difficult times!<br/>
             </p>
-            {this.renderImage(this.state.place.placeID)}<br/>
+            {this.renderImage(this.props.place.placeID)}<br/>
             <div className="buttons">
               <div className="_2pi4 _36iq _4lk2 _3xre _2165" title="Like">
                 <i className="_3-8_ _2yf7 _5jp _2166 img sp_post-plugin sx_post-plugin_like-light"></i>87K
